@@ -25,7 +25,7 @@ print(modified_reviews)
 # ==================================================================== 
 # ============// Task 1, Subtask 2 - Sentiment Tally //===============
 # ====================================================================
-
+import re
 
 reviews = [ 
                     "This product is really good. I'm impressed with its quality.", 
@@ -41,11 +41,12 @@ negative_words = ["bad", "poor", "terrible", "horrible", "awful", "disappointing
 # Create new list with all lower case letters to compare lowercase words
 lower_case_reviews = [x.lower() for x in reviews]
 
+# Using regular expression to match exact word (not partial); Otherwise it returns true if word partially matches, which we don't want => for example: "bad" in "badminton"
 def count_positive_words():
     positive_words_in_reviews = 0
     for word in positive_words:
       for review in lower_case_reviews:
-        if word in review:
+        if re.search(r'\b' + word + r'\b', review):
           print(word)
           positive_words_in_reviews += 1
     
@@ -57,7 +58,7 @@ def count_negative_words():
     negative_words_in_reviews = 0
     for word in negative_words:
       for review in lower_case_reviews:
-        if word in review:
+        if re.search(r'\b' + word + r'\b', review):
           print(word)
           negative_words_in_reviews += 1
     
